@@ -6,9 +6,13 @@ var Promise             = require('bluebird')
   // , mime                = require('mime-type/with-db')
 
 function run(host, owner, repo, filename, options = {}) {
-  let { breadboard, branch, token, method, headers, body } = options;
+  let { breadboard, branch, token, method, headers = {}, body, blob } = options;
 
   let url = git.url(host, owner, repo, filename, { breadboard, branch, token });
+
+  if (blob) {
+    headers['blob'] = (new Buffer(blob)).toString('base64');
+  }
 
   return fetch(url, {
             method
@@ -28,4 +32,6 @@ function run(host, owner, repo, filename, options = {}) {
         })
 }
 
-module.exports = run;
+module.exports = {
+  run
+};
