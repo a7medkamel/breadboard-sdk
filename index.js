@@ -2,6 +2,7 @@ var Promise             = require('bluebird')
   , _                   = require('lodash')
   , fetch               = require('isomorphic-fetch')
   , git                 = require('taskmill-core-git')
+  // , content_type        = require('content-type')
   ;
   // , mime                = require('mime-type/with-db')
 
