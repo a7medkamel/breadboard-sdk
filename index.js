@@ -3,8 +3,8 @@ var Promise             = require('bluebird')
   , fetch               = require('isomorphic-fetch')
   , git                 = require('taskmill-core-git')
   // , content_type        = require('content-type')
+  , mime                = require('mime-types')
   ;
-  // , mime                = require('mime-type/with-db')
 
 function run(host, owner, repo, filename, options = {}) {
   let { breadboard, branch, token, method = 'GET', headers = {}, body, blob } = options;
@@ -21,18 +21,24 @@ function run(host, owner, repo, filename, options = {}) {
           , headers
         })
         .then((response) => {
-          // var ext     = mime.extension(response.headers['content-type'])
-          //   , enc     = mime.charset(response.headers['content-type']) || 'binary'
-          //   , pragma  = []
-          //   ;
-          //
-          // try {
-          //   pragma = JSON.parse(response.headers['manual-pragma']);
-          // } catch (err) {}
+          let content_type  = response.headers.get('content-type')
+            , extension     = mime.extension(content_type)
+            , charset       = mime.charset(content_type)
+            , pragma        = []
+            ;
+
+          try {
+            let head = response.headers.get('manual-pragma');
+
+            pragma = JSON.parse(head);
+          } catch (err) {}
+
+          response.breadboard = { content_type, extension, charset, pragma };
+
           return response;
         })
 }
 
 module.exports = {
-  run
+    run
 };
