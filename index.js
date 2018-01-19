@@ -7,9 +7,9 @@ var Promise             = require('bluebird')
   ;
 
 function run(host, owner, repo, filename, options = {}) {
-  let { breadboard, branch, token, method = 'GET', headers = {}, body, blob } = options;
+  let { breadboard, branch, token, method = 'GET', headers = {}, body, blob, platform } = options;
 
-  let url = git.url(host, owner, repo, filename, { breadboard, branch, token });
+  let url = git.url(host, owner, repo, filename, { breadboard, branch, token, platform });
 
   if (blob) {
     headers['blob'] = (new Buffer(blob)).toString('base64');
