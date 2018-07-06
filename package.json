@@ -21,6 +21,7 @@
     "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.17.4",
     "mime-types": "^2.1.17",
-    "taskmill-core-git": "git+https://github.com/a7medkamel/taskmill-core-git.git"
+    "taskmill-core-git": "git+https://github.com/a7medkamel/taskmill-core-git.git",
+    "@polyfunc/id": "git+https://github.com/polyfunc/identifier.git"
   }
 }

@@ -4,6 +4,7 @@ var Promise             = require('bluebird')
   , git                 = require('taskmill-core-git')
   // , content_type        = require('content-type')
   , mime                = require('mime-types')
+  , PolyFunction        = require('./lib/function')
   ;
 
 function run(host, owner, repo, filename, options = {}) {
@@ -39,6 +40,11 @@ function run(host, owner, repo, filename, options = {}) {
         })
 }
 
+function func(name) {
+  return new PolyFunction(name);
+}
+
 module.exports = {
     run
+  , function : func
 };
